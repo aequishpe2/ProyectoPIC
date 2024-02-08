@@ -1,0 +1,108 @@
+﻿@model ClinicaMVC.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Registrarse";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Cree una cuenta nueva.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 col-form-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                <input type="button" value="Validar Cédula" class="btn btn-outline-secondary" id="btnValidarCedula" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br />
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+$(document).ready(function () {
+            $("#btnValidarCedula").on("click", function () {
+                var cedula = $("#PhoneNumber").val();
+                if (validarCedula(cedula)) {
+                    alert("Número de cédula válido: " + cedula);
+                    $("#btnRegistrarse").prop("disabled", false);
+                } else {
+                    alert("Número de cédula no es válido.");
+                    $("#PhoneNumber").val("");
+                    $("#btnRegistrarse").prop("disabled", true);
+                }
+            });
+
+            function validarCedula(cedula) {
+                if (cedula.length === 10 && /^\d+$/.test(cedula)) {
+                    var provincia = parseInt(cedula.substring(0, 2));
+                    var tercerDigito = parseInt(cedula.charAt(2));
+                    var consecutivo = parseInt(cedula.substring(3, 9));
+                    var digitoVerificador = parseInt(cedula.charAt(9));
+
+                    if (provincia >= 1 && provincia <= 24 && tercerDigito < 6 && consecutivo > 0 && digitoVerificador === calcularDigitoVerificador(cedula)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function calcularDigitoVerificador(cedula) {
+                var coeficientes = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+                var suma = 0;
+
+                for (var i = 0; i < coeficientes.length; i++) {
+                    var resultado = parseInt(cedula.charAt(i)) * coeficientes[i];
+                    suma += resultado > 9 ? resultado - 9 : resultado;
+                }
+
+                var decenaSuperior = Math.ceil(suma / 10) * 10;
+                return decenaSuperior - suma;
+            }
+        });</script>
+
+}

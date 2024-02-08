@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ClinicaMVC.Models.pacientes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cliente</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Cedula
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                Genero
+            </th>
+            <th>
+                Estatura
+            </th>
+            <th>
+                Peso
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>*@
+            <th>
+                Correo Electronico
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Foto)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdPaciente }, new { @class = "btn btn-outline-info btn-xs glyphicon glyphicon-pencil" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdPaciente }, new { @class = "btn btn-outline-success btn-xs glyphicon glyphicon-list-alt" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdPaciente }, new { @class = "btn btn-outline-danger btn-xs glyphicon glyphicon-trash" })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ClinicaMVC.Models.recetas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Recetas</h2>
+
+<p>
+    @Html.ActionLink("Nueva Receta", "Create")
+</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.consultas.Diagnostico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.medicamentos.Nombre)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.consultas.Diagnostico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.medicamentos.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdReceta }, new { @class = "btn btn-outline-info btn-xs glyphicon glyphicon-pencil" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdReceta }, new { @class = "btn btn-outline-success btn-xs glyphicon glyphicon-list-alt" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdReceta }, new { @class = "btn btn-outline-danger btn-xs glyphicon glyphicon-trash" })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,73 @@
+﻿@model ClinicaMVC.Models.especialidades
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>especialidades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Franja_HI)
+        </dt>
+
+        <dd>
+            @if (Model.Franja_HI < new TimeSpan(7, 0, 0) || Model.Franja_HI > new TimeSpan(11, 59, 0))
+            {
+                var a = Model.Franja_HI;
+                <text>@a</text>
+                <text> PM</text>
+            }
+            else
+            {
+                var b = Model.Franja_HI;
+                <text>@b</text>
+                <text> AM</text>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Franja_HF)
+        </dt>
+
+        <dd>
+            @if (Model.Franja_HF < new TimeSpan(7, 0, 0) || Model.Franja_HF > new TimeSpan(11, 59, 0))
+            {
+                var a = Model.Franja_HF;
+                <text>@a</text>
+                <text> PM</text>
+            }
+            else
+            {
+                var b = Model.Franja_HF;
+                <text>@b</text>
+                <text> AM</text>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEspecialidad }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

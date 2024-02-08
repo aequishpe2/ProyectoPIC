@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ClinicaMVC.Models.consultas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reservaciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva Consulta", "Create")
+</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Fecha Reservacion
+            </th>
+            <th>
+                Hora Inicio
+            </th>
+            <th>
+                Hora Fin
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Proveedor
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @string.Format("{0:dd - MMMM - yyyy}", item.FechaConsulta)
+                </td>
+                <td>
+                    @if (item.HI < new TimeSpan(7, 0, 0) || item.HI > new TimeSpan(12, 0, 0))
+                    {
+                        var a = item.HI;
+                        <text>@a</text>
+                        <text> PM</text>
+                    }
+                    else
+                    {
+                        var b = item.HI;
+                        <text>@b</text>
+                        <text> AM</text>
+                    }
+                </td>
+                <td>
+                    @if (item.HF < new TimeSpan(7, 0, 0) || item.HF > new TimeSpan(12, 0, 0))
+                    {
+                        var a = item.HF;
+                        <text>@a</text>
+                        <text> PM</text>
+                    }
+                    else
+                    {
+                        var b = item.HF;
+                        <text>@b</text>
+                        <text> AM</text>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diagnostico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pacientes.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.medicos.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdConsulta }, new { @class = "btn btn-outline-dark btn-xs glyphicon glyphicon-pencil" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdConsulta }, new { @class = "btn btn-outline-success btn-xs glyphicon glyphicon-list-alt" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdConsulta }, new { @class = "btn btn-outline-danger btn-xs glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

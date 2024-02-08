@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/GestordeEventos/providers/Microsoft.ServiceLinker/linkers/ConnectionStrings_B35C333EF8",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/grupo04veris/databases/Gestor",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings"
+    }
+  }
+}

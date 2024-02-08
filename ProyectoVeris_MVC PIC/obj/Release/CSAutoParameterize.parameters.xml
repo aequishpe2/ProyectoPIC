@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=.;Initial Catalog=ProyectoVeris_MVC_BD;integrated security=True;trustservercertificate=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Temp\\Proyecto\ A\\ProyectoVeris_MVC\ PIC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="ProyectoVeris_MVC_Entities-Web.config Connection String" description="ProyectoVeris_MVC_Entities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Models.ProyectoVeris_MVC.csdl|res://*/Models.ProyectoVeris_MVC.ssdl|res://*/Models.ProyectoVeris_MVC.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=ProyectoVeris_MVC_BD;integrated security=True;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Temp\\Proyecto\ A\\ProyectoVeris_MVC\ PIC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ProyectoVeris_MVC_Entities']/@connectionString" />
+  </parameter>
+</parameters>

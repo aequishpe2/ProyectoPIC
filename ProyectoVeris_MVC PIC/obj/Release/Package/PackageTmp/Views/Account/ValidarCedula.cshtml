@@ -1,0 +1,64 @@
+﻿@model ClinicaMVC.Models.ApplicationUser
+<div>
+    <button type="button" class="btn btn-primary" onclick="validarCedula()">Validar Cédula</button>
+</div>
+
+<script>
+    function validarCedulaFunction(cedula) {
+        // Lógica de validación de cédula ecuatoriana en JavaScript
+        if (cedula.length !== 10) {
+            return false;
+        }
+
+        var provincia = parseInt(cedula.substring(0, 2), 10);
+        if (provincia < 1 || provincia > 24) {
+            return false;
+        }
+
+        var tercerDigito = parseInt(cedula[2], 10);
+        if (tercerDigito < 0 || tercerDigito > 5) {
+            return false;
+        }
+
+        var coeficientes = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        var suma = 0;
+
+        for (var i = 0; i < coeficientes.length; i++) {
+            var digito = parseInt(cedula[i], 10);
+            digito *= coeficientes[i];
+
+            if (digito > 9) {
+                digito -= 9;
+            }
+
+            suma += digito;
+        }
+
+        var decenaSuperior = Math.ceil(suma / 10) * 10;
+        var resta = decenaSuperior - suma;
+
+        var ultimoDigito = parseInt(cedula[9], 10);
+
+        return (resta === 10 && ultimoDigito === 0) || (resta === ultimoDigito);
+    }
+
+    function validarCedula() {
+        // Lógica de validación de cédula en JavaScript
+        var cedula = "@Model.PhoneNumber" // Obtén la cédula del modelo
+
+        // Implementa tu lógica de validación aquí
+        var esCedulaValida = validarCedulaFunction(cedula);
+
+        // Muestra un mensaje de alerta
+        if (esCedulaValida) {
+            alert("La cédula es válida.");
+        } else {
+            alert("La cédula NO es válida.");
+        }
+
+        // Redirige al Index del HomeController
+        @*window.location.href = '@Url.Action("Index", "Home")';*@
+    }
+</script>
+
+<!-- El contenido HTML de tu vista parcial va aquí -->
